@@ -1,0 +1,30 @@
+{
+    "name": "parallax",
+    "title": "Parallax Propeller",
+    "description": "Parallax Propeller 2 is a multi-core microcontroller developed by Parallax Inc. It features eight 32-bit cores, each with its own clock, memory, and I/O, allowing for parallel processing and real-time multitasking",
+    "homepage": "parallax.com/propeller-2/get-started/",
+    "license": "Apache-2.0",
+    "keywords": [
+        "dev-platform",
+        "Microchip",
+        "Parallax",
+        "Propeller",
+        "8-core",
+        "32-bit"
+    ],
+    "engines": {
+      "platformio": "^6"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/RileyMcCarthy/platform-propeller"
+    },
+    "version": "1.0.0",
+    "packages": {
+      "toolchain-p2llvm": {
+        "type": "toolchain",
+        "version": "https://github.com/RileyMcCarthy/p2llvm-builds/releases/latest/download/p2llvm-master-macOS-ARM64.zip"
+      }
+    }
+  }
+  

@@ -1,0 +1,18 @@
+{
+    "build": {
+      "core": "p2",
+      "f_cpu": "300000000L",
+      "mcu": "P2X8C4M64P",
+      "variant": "standard"
+    },
+    "name": "mad_p2",
+    "upload": {
+      "maximum_ram_size": 512000,
+      "maximum_size": 512000,
+      "require_upload_port": true,
+      "resetmethod": "dtr",
+      "speed": 115200
+    },
+    "url": "",
+    "vendor": ""
+  }
