@@ -4,7 +4,7 @@
       "f_cpu": "16000000L",
       "mcu": "p2"
     },
-    "frameworks": ["LLVM"],
+    "frameworks": ["p2llvm"],
     "platforms": ["parallax"],
     "name": "P2 Edge Module",
     "upload": {
