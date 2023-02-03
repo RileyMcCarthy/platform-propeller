@@ -1,9 +1,8 @@
-
   {
-    "name": "parallax-propeller",
+    "name": "parallax",
     "title": "Parallax Propeller",
-    "description": "Parallax Propeller 2 is a multi-core microcontroller developed by Parallax Inc. It features eight 32-bit cores, each with its own clock, memory, and I/O, allowing for parallel processing and real-time multitasking",
-    "homepage": "https://parallax.com/propeller-2/get-started/",
+    "description": "Parallax Propeller is a multi-core microcontroller developed by Parallax Inc. It features eight 32-bit cores, each with its own clock, memory, and I/O, allowing for parallel processing and real-time multitasking",
+    "homepage": "https://parallax.com/",
     "license": "Apache-2.0",
     "keywords": [
       "dev-platform",
@@ -19,13 +18,9 @@
     },
     "version": "1.0.0",
     "frameworks": {
-      "%FRAMEWORK_NAME_1%": {
-        "package": "framework-%FRAMEWORK_NAME_1%",
-        "script": "builder/frameworks/%FRAMEWORK_NAME_1%.py"
-      },
-      "%FRAMEWORK_NAME_N%": {
-        "package": "framework-%FRAMEWORK_NAME_N%",
-        "script": "builder/frameworks/%FRAMEWORK_NAME_N%.py"
+      "toolchain-p2llvm": {
+        "package": "toolchain-p2llvm",
+        "script": "builder/frameworks/p2llvm.py"
       }
     },
     "packages": {
@@ -33,17 +28,7 @@
         "type": "toolchain",
         "version": "https://github.com/RileyMcCarthy/p2llvm-builds/releases/latest/download/p2llvm-master-macOS-ARM64.zip"
       },
-      "framework-%FRAMEWORK_NAME_1%": {
-        "type": "framework",
-        "optional": true,
-        "version": "~1.10607.0"
-      },
-      "framework-%FRAMEWORK_NAME_N%": {
-        "type": "framework",
-        "optional": true,
-        "version": "~1.117.0"
-      },
-      "tool-direct-vcs-url": {
+      "tool-p2load": {
         "type": "uploader",
         "optional": true,
         "version": "https://github.com/user/repo.git"
