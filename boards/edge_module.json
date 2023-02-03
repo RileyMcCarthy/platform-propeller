@@ -4,8 +4,8 @@
       "f_cpu": "16000000L",
       "mcu": "p2"
     },
-    "frameworks": ["toolchain-p2llvm"],
-    "platforms": ["parallax-propeller"],
+    "frameworks": ["LLVM"],
+    "platforms": ["parallax"],
     "name": "P2 Edge Module",
     "upload": {
       "maximum_ram_size": 2048,
