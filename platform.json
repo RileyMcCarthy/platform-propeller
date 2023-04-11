@@ -30,7 +30,7 @@
       },
       "framework-flexprop": {
         "type": "framework",
-        "optional": false,
+        "optional": true,
         "version": "~1.0.0"
       },
       "tool-p2load": {
