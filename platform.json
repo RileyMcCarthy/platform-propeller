@@ -26,7 +26,7 @@
     "packages": {
       "toolchain-flexprop": {
         "type": "toolchain",
-        "version": "https://github.com/RileyMcCarthy/p2llvm-builds/releases/latest/download/p2llvm-master-macOS-ARM64.zip"
+        "version": "https://github.com/RileyMcCarthy/toolchain-flexprop/releases/download/v6.1.0/flexprop-v6.1.0-Linux-X64.zip"
       },
       "framework-flexprop": {
         "type": "framework",
