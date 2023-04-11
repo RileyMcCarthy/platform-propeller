@@ -1,0 +1,21 @@
+{
+  "build": {
+    "core": "flexprop",
+    "extra_flags": "",
+    "mcu": "propeller2",
+    "f_cpu": "200000000L"
+  },
+  "frameworks": [
+    "flexprop"
+  ],
+  "name": "Propeller 2",
+  "upload": {
+    "maximum_ram_size": 536870912,
+    "maximum_size": 536870912,
+    "protocol": "serial",
+    "require_upload_port": true,
+    "speed": 2000000
+  },
+  "url": "https://www.parallax.com/propeller-2/",
+  "vendor": "Parallax"
+}
