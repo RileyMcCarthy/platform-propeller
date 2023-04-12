@@ -28,11 +28,6 @@
         "type": "toolchain",
         "version": "https://github.com/RileyMcCarthy/toolchain-flexprop/releases/download/v6.1.0/flexprop-v6.1.0-Linux-X64.zip"
       },
-      "framework-flexprop": {
-        "type": "framework",
-        "optional": true,
-        "version": "~1.0.0"
-      },
       "tool-p2load": {
         "type": "uploader",
         "optional": true,
