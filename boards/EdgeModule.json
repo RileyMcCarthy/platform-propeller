@@ -1,6 +1,5 @@
 {
   "build": {
-    "core": "flexprop",
     "extra_flags": "",
     "mcu": "propeller2",
     "f_cpu": "200000000L"
