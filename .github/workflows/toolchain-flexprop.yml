@@ -1,4 +1,4 @@
-name: toolchain-flexprop-release
+name: toolchain-flexprop
 permissions:
   contents: write
 on:
