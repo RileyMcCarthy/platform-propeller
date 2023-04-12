@@ -31,7 +31,9 @@
       }
     },
     "build": {
-      "core": "flexprop",
-      "extra_flags": ""
-    }
+    "core": "propeller2",
+    "extra_scripts": [
+        "scripts/builder/main.py"
+    ]
+},
   }
