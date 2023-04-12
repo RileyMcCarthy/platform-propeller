@@ -26,7 +26,7 @@
     "packages": {
       "toolchain-flexprop": {
         "type": "toolchain",
-        "version": "https://github.com/RileyMcCarthy/toolchain-flexprop/releases/download/v6.1.0/flexprop-v6.1.0-Linux-X64.zip"
+        "version": "https://github.com/RileyMcCarthy/platform-propeller/releases/download/flexprop-v6.1.0/flexprop-v6.1.0-macOS-X64.zip"
       },
       "tool-p2load": {
         "type": "uploader",
