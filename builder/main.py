@@ -1,6 +1,7 @@
-from SCons.Script import Import
+from os.path import join
+from SCons.Script import AlwaysBuild, Builder, Default, DefaultEnvironment
 
-Import("env")
+env = DefaultEnvironment()
 
 def run_flexprop(target, source, env):
     import os
