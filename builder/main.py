@@ -3,6 +3,19 @@ from SCons.Script import AlwaysBuild, Builder, Default, DefaultEnvironment
 
 env = DefaultEnvironment()
 
+env.Replace(
+    AR="ar",
+    CC="gcc",
+    CXX="g++",
+    LINK="gcc",
+    AS="as",
+)
+
+env.Append(
+    CCFLAGS=["-Wall"],
+    LINKFLAGS=["-Wl,-Map=${TARGET}.map"],
+)
+
 def run_flexprop(target, source, env):
     import os
     toolchain_path = env.PioPlatform().get_package_dir("toolchain-flexprop")
@@ -15,4 +28,17 @@ env.Replace(
     SIZEPROG="size",
 )
 
-env.AddPostAction("$BUILD_DIR/${PROGNAME}.elf", run_flexprop)
+env['BUILDERS']['Program'] = Builder(
+    action=env.VerboseAction(run_flexprop, "Building $TARGET"),
+    suffix=".elf",
+)
+
+# Add source files to the build environment
+env.Append(
+    CPPPATH=[join("$PROJECT_SRC_DIR")],
+    SRC_FILTER=[
+        "+<*>",
+    ],
+)
+
+Default([env.Program(join("$BUILD_DIR", "${PROGNAME}"), join("$PROJECT_SRC_DIR", "main.c"))])
