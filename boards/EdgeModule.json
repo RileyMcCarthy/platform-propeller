@@ -5,7 +5,6 @@
     "f_cpu": "200000000L"
   },
   "frameworks": [
-    "flexprop"
   ],
   "name": "Propeller 2",
   "upload": {
