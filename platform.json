@@ -31,9 +31,9 @@
       }
     },
     "build": {
-    "core": "propeller2",
-    "extra_scripts": [
-        "scripts/builder/main.py"
-    ]
-},
+      "core": "propeller2",
+      "extra_scripts": [
+          "scripts/builder/main.py"
+      ]
+    }
   }
