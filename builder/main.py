@@ -21,10 +21,9 @@ def run_flexprop(target, source, env):
     toolchain_path = env.PioPlatform().get_package_dir("toolchain-flexprop")
     cmd = [
         os.path.join(toolchain_path, "flexcc"),
-        "-o",
-        str(target[0]),
         "-2",  # Compile for Prop2
         "-O2", # Optimization level
+        str(target[0]),
         str(source[0]),
     ]
     env.Execute(cmd)
