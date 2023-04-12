@@ -20,7 +20,7 @@ def run_flexprop(target, source, env):
     import os
     toolchain_path = env.PioPlatform().get_package_dir("toolchain-flexprop")
     cmd = [
-        os.path.join(toolchain_path, "flexprop"),
+        os.path.join(toolchain_path, "flexcc"),
         "-o",
         str(target[0]),
         "-2",  # Compile for Prop2
