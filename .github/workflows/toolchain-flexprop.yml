@@ -56,6 +56,7 @@ jobs:
     - name: Create release directory and copy required files
       run: |
         mkdir 'release'
+        mkdir 'release/bin'
         cp package.json release
         cp build/flexcc bin/release
         cp build/flexspin bin/release
