@@ -57,9 +57,9 @@ jobs:
       run: |
         mkdir 'release'
         cp package.json release
-        cp build/flexcc release
-        cp build/flexspin release
-        cp build/spin2cpp release
+        cp build/flexcc bin/release
+        cp build/flexspin bin/release
+        cp build/spin2cpp bin/release
         cp -R include release
     # Zip artifacts
     - name: Zip artifact for deployment
