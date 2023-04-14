@@ -47,7 +47,7 @@ jobs:
             "propeller"
           ],
           "homepage": "https://github.com/totalspectrum/loadp2",
-          "license": "GPL-2.0-or-later",
+          "license": "GPL-2.0-or-later"
         }
         ' > 'package.json'
     # Create build directory
