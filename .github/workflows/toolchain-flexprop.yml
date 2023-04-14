@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v3
       with:
         repository: totalspectrum/spin2cpp
-        ref: ${{ github.event.inputs.branch }}
+        ref: v${{ github.event.inputs.branch }}
         submodules: recursive
     # make spin2cpp
     - name: Make targets
