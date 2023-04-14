@@ -33,7 +33,7 @@ jobs:
         make
     - name: Copy spin2cpp to main dir
       run: |
-        cp ./tools/build/flexspin ./loadp2
+        cp ./tools/build/flexspin ./loadp2/flexspin
     # make loadp2
     - name: Make targets
       run: make
