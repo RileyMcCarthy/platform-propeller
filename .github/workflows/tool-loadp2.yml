@@ -31,10 +31,9 @@ jobs:
       run: |
         cd ./tools
         make
-        cp ./build/spin2cpp ./
     - name: Copy spin2cpp to main dir
       run: |
-        cp ./tools/build/spin2cpp ./
+        cp ./tools/build/flexspin ./
     # make loadp2
     - name: Make targets
       run: make
