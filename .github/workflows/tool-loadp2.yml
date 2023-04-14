@@ -18,17 +18,25 @@ jobs:
     # Checkout spin2cpp repo and setup environment
     - uses: actions/checkout@v3
       with:
-        repository: totalspectrum/flexprop
+        repository: totalspectrum/loadp2
         ref: ${{ github.event.inputs.branch }}
         submodules: recursive
-        path: "flexprop"
-    - name: Make Flexprop
+    - name: Checkout spin2cpp as a tool
+      uses: actions/checkout@v3
+      with:
+        repository: totalspectrum/spin2cpp
+        path: ./tools
+      # make spin2cpp
+    - name: Make spin2cpp
       run: |
-        cd flexprop
-        make INSTALL="../"
+        cd ./tools
+        make
+    - name: Copy spin2cpp to main dir
+      run: |
+        cp ./tools/build/flexspin ./loadp2/flexspin
     # make loadp2
     - name: Make targets
-      run: make
+      run: make P2ASM="${{github.workspace}}/tools/build/flexspin -2"
     - name: Create platformio package.json
       run: >
         echo '
@@ -51,7 +59,10 @@ jobs:
         mkdir 'release'
         mkdir 'release/bin'
         cp package.json release
-        cp flexprop/loadp2 release
+        cp build/flexcc release/bin
+        cp build/flexspin release/bin
+        cp build/spin2cpp release/bin
+        cp -R include release
     # Zip artifacts
     - name: Zip artifact for deployment
       uses: thedoctor0/zip-release@0.7.0
@@ -59,13 +70,13 @@ jobs:
         type: 'zip'
         directory: 'release'
         path: './'
-        filename: loadp2-${{ github.event.inputs.branch }}-${{ runner.os }}-${{ runner.arch }}.zip
+        filename: flexprop-${{ github.event.inputs.branch }}-${{ runner.os }}-${{ runner.arch }}.zip
     # Uploading build files
     - name: Archive results
       uses: actions/upload-artifact@v3
       with:
-        name: loadp2-${{ github.event.inputs.branch }}-${{ runner.os }}-${{ runner.arch }}.zip
-        path: 'release/loadp2-${{ github.event.inputs.branch }}-${{ runner.os }}-${{ runner.arch }}.zip'
+        name: flexprop-${{ github.event.inputs.branch }}-${{ runner.os }}-${{ runner.arch }}.zip
+        path: 'release/flexprop-${{ github.event.inputs.branch }}-${{ runner.os }}-${{ runner.arch }}.zip'
   create-release:
     needs: build-multiplatform
     runs-on: ubuntu-latest
@@ -80,7 +91,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: ./artifacts/*/*
-        tag_name: loadp2-${{ github.event.inputs.branch }}
+        tag_name: flexprop-${{ github.event.inputs.branch }}
         draft: false
         prerelease: false
       env:
