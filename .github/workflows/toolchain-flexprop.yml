@@ -39,9 +39,9 @@ jobs:
     # Rename tools to .exe, .mac, and '' for windows, max, linux 
     - if: runner.os == 'Windows'
       run: |
-        cp build/flexcc tools/flexcc.exe
-        cp build/flexspin tools/flexspin.exe
-        cp build/spin2cpp tools/spin2cpp.exe
+        msys2 -c 'cp build/flexcc tools/flexcc.exe'
+        msys2 -c 'cp build/flexspin tools/flexspin.exe'
+        msys2 -c 'cp build/spin2cpp tools/spin2cpp.exe'
     - if: runner.os == 'Linux'
       run: |
         cp build/flexcc tools/flexcc
