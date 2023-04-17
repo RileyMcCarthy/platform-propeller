@@ -14,18 +14,12 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest,ubuntu-latest,macos-latest]
-    defaults:
-      run:
-        shell: ${{ matrix.os == 'Windows' && 'msys2 {0}' || 'bash' }}
     steps:
     - name: Install Bison
       if: runner.os == 'Windows'
       uses: msys2/setup-msys2@v2
       with:
         install: gcc make bison
-      defaults:
-        run:
-          shell: msys2 {0}
     # Checkout spin2cpp repo and setup environment
     - uses: actions/checkout@v3
       with:
@@ -33,7 +27,11 @@ jobs:
         ref: v${{ github.event.inputs.branch }}
         submodules: recursive
     # make spin2cpp
-    - name: Make targets
+    - name: Make targets (Windows only)
+      if: runner.os == 'Windows'
+      run: msys2 -c make
+    - name: Make targets (Non-Windows)
+      if: runner.os != 'Windows'
       run: make
     # Create tools directory
     - name: Make tools directory
