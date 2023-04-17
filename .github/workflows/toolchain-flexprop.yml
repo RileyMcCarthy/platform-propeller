@@ -42,6 +42,7 @@ jobs:
         msys2 -c 'cp build/flexcc tools/flexcc.exe'
         msys2 -c 'cp build/flexspin tools/flexspin.exe'
         msys2 -c 'cp build/spin2cpp tools/spin2cpp.exe'
+        msys2 -c 'cp build/spin2cpp tools/spin2cpp.exe'
     - if: runner.os == 'Linux'
       run: |
         cp build/flexcc tools/flexcc
@@ -123,11 +124,11 @@ jobs:
         type: 'zip'
         directory: 'release'
         path: './'
-        filename: flexprop-${{ github.event.inputs.branch }}-${{ runner.os }}-${{ runner.arch }}.zip
+        filename: flexprop-${{ github.event.inputs.branch }}.zip
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
       with:
-        files: ./artifacts/*/*
+        files: flexprop-${{ github.event.inputs.branch }}.zip
         tag_name: flexprop-${{ github.event.inputs.branch }}
         draft: false
         prerelease: false
