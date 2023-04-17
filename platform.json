@@ -22,18 +22,10 @@
     "packages": {
       "toolchain-flexprop": {
         "type": "toolchain",
-        "version": "https://github.com/RileyMcCarthy/platform-propeller/releases/download/flexprop-v6.1.0/flexprop-v6.1.0-macOS-X64.zip"
+        "version": "https://github.com/RileyMcCarthy/platform-propeller/releases/download/flexprop-5.1.1/flexprop.zip"
       },
-      "tool-p2load": {
-        "type": "uploader",
-        "optional": true,
-        "version": "https://github.com/user/repo.git"
+      "tool-loadp2": {
+        "type": "uploader"
       }
-    },
-    "build": {
-      "core": "propeller2",
-      "extra_scripts": [
-          "builder/main.py"
-      ]
     }
   }
