@@ -119,11 +119,11 @@ jobs:
         cp artifacts/tools-macOS/spin2cpp.mac release/bin
     # Zip artifacts
     - name: Zip artifact for deployment
-      run: cd release && zip -r -q ../flexprop-${{ github.event.inputs.branch }}.zip .
+      run: cd release && zip -r -q ../flexprop.zip .
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
       with:
-        files: flexprop-${{ github.event.inputs.branch }}.zip
+        files: flexprop.zip
         tag_name: flexprop-${{ github.event.inputs.branch }}
         draft: false
         prerelease: false
