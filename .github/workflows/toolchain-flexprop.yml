@@ -117,6 +117,9 @@ jobs:
         cp artifacts/tools-macOS/flexcc.mac release/bin
         cp artifacts/tools-macOS/flexspin.mac release/bin
         cp artifacts/tools-macOS/spin2cpp.mac release/bin
+    # Change Permissions
+    - name: Change Permission
+      run: chmod a+x release/bin/*
     # Zip artifacts
     - name: Zip artifact for deployment
       run: cd release && zip -r -q ../flexprop.zip .
