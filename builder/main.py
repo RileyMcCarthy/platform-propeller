@@ -3,6 +3,8 @@ import os
 from SCons.Script import DefaultEnvironment
 import platform
 
+import platform
+
 
 env = DefaultEnvironment()
 
@@ -23,6 +25,8 @@ else:
     loadp2_executable = "loadp2"
 
 toolchain_path = env.PioPlatform().get_package_dir("toolchain-flexprop")
+flexcc = os.path.join(toolchain_path, "bin", flexcc_executable)
+flexprop_include_path = os.path.join(toolchain_path, "include")
 flexcc = os.path.join(toolchain_path, "bin", flexcc_executable)
 flexprop_include_path = os.path.join(toolchain_path, "include")
 
@@ -47,6 +51,12 @@ if not env.get("PIOFRAMEWORK"):
     env.SConscript("frameworks/_bare.py", exports="env")
 
 target_elf = env.BuildProgram()
+
+#
+# Target: Upload firmware
+#
+upload = env.Alias(["upload"], target_elf, "$UPLOADCMD")
+AlwaysBuild(upload)
 
 #
 # Target: Upload firmware
