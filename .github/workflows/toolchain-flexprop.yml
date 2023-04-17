@@ -7,7 +7,7 @@ on:
       branch:
         description: 'Branch to create release from'     
         required: true
-        default: 'master'
+        default: ''
 jobs:
   build-multiplatform:
     runs-on: ${{ matrix.os }}
