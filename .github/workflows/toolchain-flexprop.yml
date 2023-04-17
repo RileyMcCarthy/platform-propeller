@@ -14,14 +14,18 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest,ubuntu-latest,macos-latest]
-    env:
-      install_dest: ${{github.workspace}}/llvm-project/build_release
+    defaults:
+      run:
+        shell: ${{ matrix.os == 'Windows' && 'msys2 {0}' || 'bash' }}
     steps:
     - name: Install Bison
       if: runner.os == 'Windows'
       uses: msys2/setup-msys2@v2
       with:
         install: gcc make bison
+      defaults:
+        run:
+          shell: msys2 {0}
     # Checkout spin2cpp repo and setup environment
     - uses: actions/checkout@v3
       with:
