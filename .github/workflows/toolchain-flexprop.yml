@@ -17,6 +17,9 @@ jobs:
     env:
       install_dest: ${{github.workspace}}/llvm-project/build_release
     steps:
+    - name: Install Bison
+      if: runner.os == 'Windows'
+      uses: bison-packages/install-bison@v1
     # Checkout spin2cpp repo and setup environment
     - uses: actions/checkout@v3
       with:
