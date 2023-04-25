@@ -123,11 +123,12 @@ jobs:
       with:
         type: 'zip'
         directory: 'release'
+        path: ${{ github.workspace }}
         filename: flexprop.zip
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
       with:
-        files: flexprop.zip
+        files: ${{ github.workspace }}/flexprop.zip
         tag_name: flexprop-${{ github.event.inputs.branch }}
         draft: false
         prerelease: false
