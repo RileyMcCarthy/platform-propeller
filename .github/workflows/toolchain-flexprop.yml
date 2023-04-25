@@ -122,8 +122,7 @@ jobs:
       uses: thedoctor0/zip-release@0.7.0
       with:
         type: 'zip'
-        directory: 'release'
-        path: ${{ github.workspace }}
+        path: 'release'
         filename: flexprop.zip
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
