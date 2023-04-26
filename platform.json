@@ -22,10 +22,11 @@
     "packages": {
       "toolchain-flexprop": {
         "type": "toolchain",
-        "version": "https://github.com/RileyMcCarthy/platform-propeller/releases/download/flexprop-5.1.1/flexprop.zip"
+        "version": "https://github.com/RileyMcCarthy/toolchain-flexprop.git"
       },
       "tool-loadp2": {
-        "type": "uploader"
+        "type": "uploader",
+        "version": "https://github.com/RileyMcCarthy/tool-loadp2.git"
       }
     }
   }
