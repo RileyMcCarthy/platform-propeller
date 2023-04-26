@@ -14,7 +14,7 @@ Enter the github url https://github.com/RileyMcCarthy/platform-propeller.git
 pio platform install https://github.com/RileyMcCarthy/platform-propeller.git
 ```
 
-#Packages
+# Packages
 
 https://github.com/RileyMcCarthy/toolchain-flexprop
 
