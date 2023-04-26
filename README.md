@@ -11,7 +11,7 @@ Enter the github url https://github.com/RileyMcCarthy/platform-propeller.git
 ## Installation (CLI)
 
 ```
-pio platform install https://github.com/RileyMcCarthy/platform-propeller.git
+pio pkg install --platform https://github.com/RileyMcCarthy/platform-propeller.git
 ```
 
 ## Packages
