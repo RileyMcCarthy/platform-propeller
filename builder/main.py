@@ -7,6 +7,7 @@ import platform
 env = DefaultEnvironment()
 
 system = platform.system()
+arch = platform.machine()
 
 if system == "Windows":
     flexcc_executable = "flexcc.exe"
@@ -14,6 +15,9 @@ if system == "Windows":
 elif system == "Darwin":
     flexcc_executable = "flexcc.mac"
     loadp2_executable = "loadp2.mac"
+elif arch == "armv7l":
+    flexcc_executable = "flexcc.rpi"
+    loadp2_executable = "loadp2.rpi"
 else:
     flexcc_executable = "flexcc"
     loadp2_executable = "loadp2"
