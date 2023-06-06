@@ -22,11 +22,11 @@
     "packages": {
       "toolchain-flexprop": {
         "type": "toolchain",
-        "version": "https://github.com/RileyMcCarthy/toolchain-flexprop.git#latest"
+        "version": "https://github.com/RileyMcCarthy/toolchain-flexprop.git"
       },
       "tool-loadp2": {
         "type": "uploader",
-        "version": "https://github.com/RileyMcCarthy/tool-loadp2.git#latest"
+        "version": "https://github.com/RileyMcCarthy/tool-loadp2.git"
       }
     }
   }
