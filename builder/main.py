@@ -63,6 +63,7 @@ if upload_protocol.startswith("flash"):
     env.Replace(
         UPLOADERFLAGS=[
             "-t",
+            "-v",
             "-b230400",
             "\"@0=$FLASH,@8000+$SOURCES\"",
         ],
@@ -73,14 +74,15 @@ elif upload_protocol.startswith("sdcard"):
     env.Replace(
         UPLOADERFLAGS=[
             "-t",
+            "-v",
             "-b230400",
-            "\"@0=$FLASH,@8000+$SOURCES\"",
+            "\"@0=$SDCARD,@8000+$SOURCES\"",
         ],
         UPLOADCMD="$UPLOADER $UPLOADERFLAGS",
     )
 elif upload_protocol.startswith("serial"):
     env.Replace(
-        UPLOADERFLAGS=["-t","-b230400"],
+        UPLOADERFLAGS=["-t","-v","-b230400"],
         UPLOADCMD="$UPLOADER $UPLOADERFLAGS $SOURCES",
     )
     upload_actions = ["$UPLOADCMD"]
