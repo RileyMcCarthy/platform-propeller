@@ -51,7 +51,7 @@ env.Replace(
 
 # Add build flags
 env.Append(
-    CCFLAGS=["-2", "-Wall", "-O1", "-D__WORKSPACE__='\"$PROJECT_DIR\"'"],
+    CCFLAGS=["-2", "-Wall", "-O1"],
     LINKFLAGS=["-2", "-Wall", "-O1"],
     CPPPATH=[flexprop_include_path],
 )
