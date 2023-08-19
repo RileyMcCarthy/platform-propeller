@@ -19,7 +19,7 @@ https://github.com/RileyMcCarthy/platform-propeller.git#6.2.3
 ## Installation (CLI)
 
 ```
-pio pkg install --platform https://github.com/RileyMcCarthy/platform-propeller.git
+pio pkg install --platform https://github.com/RileyMcCarthy/platform-propeller.git#6.2.3
 ```
 
 ## Packages
