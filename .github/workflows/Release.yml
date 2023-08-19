@@ -14,11 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Find and Replace
-      uses: nguyenvanuyn96/str-find-and-replace-action@master
-      with:
-        find: "toolchain-flexprop.git#v[0-9]+.[0-9]+.[0-9]+"
-        replace: "toolchain-flexprop.git#${{ github.event.inputs.FlexPropVersion }}"
+    - name: Update Flexprop Version
+      run: |
+        sed -E 's/(toolchain-flexprop.git#)v[0-9]+\.[0-9]+\.[0-9]+/\1${{ github.event.inputs.FlexPropVersion }}/' platform.json
     - name: Find and Replace
       uses: nguyenvanuyn96/str-find-and-replace-action@master
       with:
