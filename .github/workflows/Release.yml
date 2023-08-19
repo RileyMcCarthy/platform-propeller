@@ -22,9 +22,15 @@ jobs:
       run: |
         sed -E -i 's/(tool-loadp2.git#)v[0-9]+/\1${{ github.event.inputs.LoadP2Version }}/' platform.json
         sed -E -i 's/(tool-loadp2.git#)v[0-9]+/\1${{ github.event.inputs.LoadP2Version }}/' README.md
-    - uses: stefanzweifel/git-auto-commit-action@v4
+    - name: Commit files
+      run: |
+        git config --local user.email "riley.mccarthy@yahoo.com"
+        git config --local user.name "rileymccarthy"
+        git commit -a -m 'Updating to Flexprop ${{ github.event.inputs.FlexPropVersion }} and LoadP2 ${{ github.event.inputs.LoadP2Version }}'
+    - name: Push changes
+      uses: ad-m/github-push-action@master
       with:
-        commit_message: 'Updating to Flexprop ${{ github.event.inputs.FlexPropVersion }} and LoadP2 ${{ github.event.inputs.LoadP2Version }}'
+        branch: ${{ github.head_ref }}
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
       with:
