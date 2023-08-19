@@ -26,7 +26,6 @@ jobs:
       with:
         find: "tool-loadp2.git#*[0-9]+.[0-9]+.[0-9]+"
         replace: "tool-loadp2.git#${{ github.event.inputs.LoadP2Version }}"
-        include: "*"
         regex: true
     - name: Push updated package
       run: |
