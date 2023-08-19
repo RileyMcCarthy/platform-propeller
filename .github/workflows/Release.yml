@@ -17,14 +17,14 @@ jobs:
     - name: Find and Replace platform.json
       uses: jacobtomlinson/gha-find-replace@v3
       with:
-        find: "toolchain-flexprop.git#*[0-9]+.[0-9]+.[0-9]+"
+        find: "toolchain-flexprop.git#v[0-9]+.[0-9]+.[0-9]+"
         replace: "toolchain-flexprop.git#${{ github.event.inputs.FlexPropVersion }}"
         include: "*"
         regex: true
     - name: Find and Replace platform.json
       uses: jacobtomlinson/gha-find-replace@v3
       with:
-        find: "tool-loadp2.git#*[0-9]+.[0-9]+.[0-9]+"
+        find: "tool-loadp2.git#v[0-9]+"
         replace: "tool-loadp2.git#${{ github.event.inputs.LoadP2Version }}"
         regex: true
     - name: Push updated package
