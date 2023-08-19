@@ -18,19 +18,15 @@ jobs:
       run: |
         sed -E -i 's/(toolchain-flexprop.git#)v[0-9]+\.[0-9]+\.[0-9]+/\1${{ github.event.inputs.FlexPropVersion }}/' platform.json
         sed -E -i 's/(toolchain-flexprop.git#)v[0-9]+\.[0-9]+\.[0-9]+/\1${{ github.event.inputs.FlexPropVersion }}/' README.md
-    - name: Find and Replace
-      uses: nguyenvanuyn96/str-find-and-replace-action@master
-      with:
-        find: "tool-loadp2.git#v[0-9]+"
-        replace: "tool-loadp2.git#${{ github.event.inputs.LoadP2Version }}"
-    - name: Push updated package
+    - name: Update LoadP2 Version
       run: |
-        git config --global user.name 'rileymccarthy'
-        git config --global user.email 'riley.mccarthy@yahoo.com'
-        git status
-        git add '.'
-        git commit -am "v${{ github.event.inputs.FlexPropVersion }}"
-        git push
+        sed -E -i 's/(tool-loadp2.git#)v[0-9]+/\1${{ github.event.inputs.LoadP2Version }}/' platform.json
+        sed -E -i 's/(tool-loadp2.git#)v[0-9]+/\1${{ github.event.inputs.LoadP2Version }}/' README.md
+    - name: Push Changes
+      uses: actions-go/push@master
+      with:
+        commit-message: '[Auto] update pre-puilt dist packages'
+        remote: origin
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
       with:
