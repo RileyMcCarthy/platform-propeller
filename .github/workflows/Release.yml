@@ -28,6 +28,7 @@ jobs:
       run: |
         git config --global user.name 'rileymccarthy'
         git config --global user.email 'riley.mccarthy@yahoo.com'
+        git status
         git add '.'
         git commit -am "v${{ github.event.inputs.FlexPropVersion }}"
         git push
