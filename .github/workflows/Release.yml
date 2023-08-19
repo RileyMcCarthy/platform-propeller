@@ -22,11 +22,9 @@ jobs:
       run: |
         sed -E -i 's/(tool-loadp2.git#)v[0-9]+/\1${{ github.event.inputs.LoadP2Version }}/' platform.json
         sed -E -i 's/(tool-loadp2.git#)v[0-9]+/\1${{ github.event.inputs.LoadP2Version }}/' README.md
-    - name: Push Changes
-      uses: actions-go/push@master
+    - uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit-message: '[Auto] update pre-puilt dist packages'
-        remote: origin
+        commit_message: 'Updating to Flexprop ${{ github.event.inputs.FlexPropVersion }} and LoadP2 ${{ github.event.inputs.LoadP2Version }}'
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
       with:
