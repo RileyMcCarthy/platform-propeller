@@ -16,6 +16,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Update Flexprop Version
       run: |
+        sed -E -i 's/("version":)[0-9]+\.[0-9]+\.[0-9]+/\1${{ github.event.inputs.FlexPropVersion }}/' platform.json
         sed -E -i 's/(toolchain-flexprop.git#)v[0-9]+\.[0-9]+\.[0-9]+/\1${{ github.event.inputs.FlexPropVersion }}/' platform.json
         sed -E -i 's/(toolchain-flexprop.git#)v[0-9]+\.[0-9]+\.[0-9]+/\1${{ github.event.inputs.FlexPropVersion }}/' README.md
     - name: Update LoadP2 Version
@@ -34,7 +35,7 @@ jobs:
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: v${{ github.event.inputs.FlexPropVersion }}
+        tag_name: ${{ github.event.inputs.FlexPropVersion }}
         draft: false
         prerelease: false
       env:
