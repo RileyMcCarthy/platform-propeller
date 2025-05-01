@@ -22,7 +22,7 @@
     "packages": {
       "toolchain-flexprop": {
         "type": "toolchain",
-        "version": "https://github.com/RileyMcCarthy/toolchain-flexprop.git#v6.9.1"
+        "version": "https://github.com/RileyMcCarthy/toolchain-flexprop.git#v7.2.1"
       },
       "tool-loadp2": {
         "type": "uploader",
