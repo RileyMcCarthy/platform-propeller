@@ -1,0 +1,44 @@
+  {
+    "name": "platform-propeller",
+    "title": "Parallax Propeller",
+    "description": "Parallax Propeller is a multi-core microcontroller developed by Parallax Inc. It features eight 32-bit cores, each with its own clock, memory, and I/O, allowing for parallel processing and real-time multitasking",
+    "homepage": "https://parallax.com/",
+    "license": "Apache-2.0",
+    "keywords": [
+      "dev-platform",
+      "Microchip",
+      "Parallax",
+      "Propeller",
+      "8-core",
+      "32-bit"
+  ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/RileyMcCarthy/platform-parallax.git"
+    },
+  "version": "6.2.4",
+    "frameworks": {
+      "flexcc": {
+        "package": "toolchain-flexcc",
+        "script": "builder/frameworks/flexcc.py"
+      },
+      "p2llvm": {
+        "package": "toolchain-p2llvm",
+        "script": "builder/frameworks/p2llvm.py"
+      }
+    },
+    "packages": {
+      "toolchain-flexcc": {
+        "type": "toolchain", 
+        "version": "https://github.com/RileyMcCarthy/spin2cpp/releases/download/v7.4.3/flexcc.zip"
+      },
+      "toolchain-p2llvm": {
+        "type": "toolchain",
+        "version": "https://github.com/RileyMcCarthy/p2llvm/releases/download/v0.8.0/tool-p2llvm.zip"
+      },
+      "tool-loadp2": {
+        "type": "uploader",
+        "version": "https://github.com/RileyMcCarthy/loadp2/releases/download/v075/tool-loadp2.zip"
+      }
+    }
+  }

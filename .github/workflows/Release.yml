@@ -1,0 +1,42 @@
+name: Release Platform Propeller
+on: 
+  workflow_dispatch:
+    inputs:
+      FlexPropVersion:
+        description: 'FlexProp Version'     
+        required: true
+      LoadP2Version:
+        description: 'LoadP2 Version'
+        required: true
+        default: "v047"
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Update Flexprop Version
+      run: |
+        sed -E -i 's/("version":)[0-9]+\.[0-9]+\.[0-9]+/\1${{ github.event.inputs.FlexPropVersion }}/' platform.json
+        sed -E -i 's/(toolchain-flexprop.git#)v[0-9]+\.[0-9]+\.[0-9]+/\1${{ github.event.inputs.FlexPropVersion }}/' platform.json
+        sed -E -i 's/(toolchain-flexprop.git#)v[0-9]+\.[0-9]+\.[0-9]+/\1${{ github.event.inputs.FlexPropVersion }}/' README.md
+    - name: Update LoadP2 Version
+      run: |
+        sed -E -i 's/(tool-loadp2.git#)v[0-9]+/\1${{ github.event.inputs.LoadP2Version }}/' platform.json
+        sed -E -i 's/(tool-loadp2.git#)v[0-9]+/\1${{ github.event.inputs.LoadP2Version }}/' README.md
+    - name: Commit files
+      run: |
+        git config --local user.email "riley.mccarthy@yahoo.com"
+        git config --local user.name "rileymccarthy"
+        git commit -a -m 'Updating to Flexprop ${{ github.event.inputs.FlexPropVersion }} and LoadP2 ${{ github.event.inputs.LoadP2Version }}'
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: ${{ github.head_ref }}
+    - name: Release with Notes
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.event.inputs.FlexPropVersion }}
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
