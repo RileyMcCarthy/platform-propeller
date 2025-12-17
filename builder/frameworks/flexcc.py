@@ -6,6 +6,7 @@ Uses the FlexC compiler toolchain for C/C++ development on Propeller chips.
 import os
 import platform
 from SCons.Script import DefaultEnvironment
+from frameworks._loadp2 import setup_loadp2
 
 env = DefaultEnvironment()
 platform_instance = env.PioPlatform()
@@ -29,20 +30,6 @@ def get_platform_subdir():
         # Default to linux-amd64 for unknown platforms
         return "linux-amd64"
 
-def get_loadp2_platform_subdir():
-    """Get the platform-specific subdirectory name for LoadP2 tools."""
-    system = platform.system()
-    
-    if system == "Windows":
-        return "windows"
-    elif system == "Darwin":  # macOS
-        return "macos"
-    elif system == "Linux":
-        return "linux"
-    else:
-        # Default to linux for unknown platforms
-        return "linux"
-
 def get_executable_name(base_name):
     """Get the executable name based on the current platform."""
     system = platform.system()
@@ -59,9 +46,9 @@ def ensure_executable_permissions(executable_path):
             import stat
             current_permissions = os.stat(executable_path).st_mode
             os.chmod(executable_path, current_permissions | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
-            print(f"Added execute permissions to {executable_path}")
+            print(f"FlexCC: Added execute permissions to {executable_path}")
         except Exception as e:
-            print(f"Warning: Could not add execute permissions to {executable_path}: {e}")
+            print(f"FlexCC: Warning - Could not add execute permissions to {executable_path}: {e}")
 
 # Configure FlexCC toolchain
 toolchain_path = platform_instance.get_package_dir("toolchain-flexcc")
@@ -86,52 +73,54 @@ env.Replace(
 
 # Add build flags
 env.Append(
-    CCFLAGS=["-2", "-Wall", "-O1", "--nostdlib", f"-I{flexprop_include_path}"],
-    LINKFLAGS=["-2", "-Wall", "-O1", "--nostdlib", f"-I{flexprop_include_path}"],
+    CCFLAGS=[
+        "-2",
+        "-Wall",
+        "-O1",
+        "--nostdlib",
+        f"-I{flexprop_include_path}"
+    ],
+    LINKFLAGS=[
+        "-2",
+        "-Wall",
+        "-O1",
+        "--nostdlib",
+        f"-I{flexprop_include_path}"
+    ],
 )
 
-# Configure LoadP2 uploader
-loadp2_platform_subdir = get_loadp2_platform_subdir()
-loadp2_executable = get_executable_name("loadp2")
-uploader_path = platform_instance.get_package_dir("tool-loadp2")
+# -----------------------------------------------------------------------------
+# Add program size reporting
+# -----------------------------------------------------------------------------
+def print_program_info(source, target, env):
+    """Display program size information after successful build."""
+    program_path = str(target[0])  # Use target instead of source
+    
+    print("=" * 80)
+    print("FlexCC: Program Build Information")
+    print("=" * 80)
+    
+    # Get file size
+    try:
+        file_size = os.path.getsize(program_path)
+        print(f"Program: {os.path.basename(program_path)}")
+        print(f"Binary file size: {file_size:,} bytes ({file_size/1024:.2f} KB)")
+        
+        # Calculate percentage of available memory from board config
+        board_config = env.BoardConfig()
+        ram_size = board_config.get("upload.maximum_ram_size", 524288)  # Default to 512KB if not specified
+        percentage = (file_size / ram_size) * 100
+        print(f"RAM usage: {percentage:.1f}% of {ram_size/1024:.0f} KB")
+        
+    except Exception as e:
+        print(f"FlexCC: Warning - Could not get file size: {e}")
+    
+    print("=" * 80)
 
-# Configure uploader paths
-uploader = os.path.join(uploader_path, "bin", loadp2_platform_subdir, loadp2_executable)
-sdcard = os.path.join(uploader_path, "bin", "P2ES_sdcard.bin")
-flash = os.path.join(uploader_path, "bin", "P2ES_flashloader.bin")
+# Add the info display as a post-action to the program build
+env.AddPostAction("$BUILD_DIR/${PROGNAME}$PROGSUFFIX", print_program_info)
 
-# Ensure LoadP2 executable has execute permissions
-ensure_executable_permissions(uploader)
-
-env.Replace(
-    UPLOADER=uploader,
-    SDCARD=sdcard,
-    FLASH=flash,
-    UPLOADERFLAGS=["-b230400"],
-    UPLOADCMD="$UPLOADER $UPLOADERFLAGS $SOURCES",
-)
-
-# Configure upload protocols
-upload_protocol = env.subst("$UPLOAD_PROTOCOL")
-
-if upload_protocol.startswith("flash"):
-    env.Replace(
-        UPLOADERFLAGS=[
-            "-t", "-v", "-b230400",
-            '"@0=$FLASH,@8000+$SOURCES"',
-        ],
-        UPLOADCMD="$UPLOADER $UPLOADERFLAGS",
-    )
-elif upload_protocol.startswith("sdcard"):
-    env.Replace(
-        UPLOADERFLAGS=[
-            "-t", "-v", "-b230400",
-            '"@0=$SDCARD,@8000+$SOURCES"',
-        ],
-        UPLOADCMD="$UPLOADER $UPLOADERFLAGS",
-    )
-elif upload_protocol.startswith("serial"):
-    env.Replace(
-        UPLOADERFLAGS=["-t", "-v", "-b230400"],
-        UPLOADCMD="$UPLOADER $UPLOADERFLAGS $SOURCES",
-    )
+# -----------------------------------------------------------------------------
+# Configure LoadP2 uploader (using shared _loadp2.py module)
+# -----------------------------------------------------------------------------
+setup_loadp2(env, platform_instance)

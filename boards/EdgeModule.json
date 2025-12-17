@@ -8,14 +8,18 @@
     "flexcc",
     "p2llvm"
   ],
-  "name": "Propeller 2",
+  "name": "Propeller 2 Edge Module",
   "upload": {
-    "maximum_ram_size": 536870912,
-    "maximum_size": 536870912,
+    "maximum_ram_size": 524288,
+    "maximum_size": 524288,
     "protocol": "serial",
     "require_upload_port": true,
     "speed": 2000000
   },
-  "url": "https://www.parallax.com/propeller-2/",
-  "vendor": "Parallax"
+  "url": "https://www.parallax.com/product/p2-edge-module/",
+  "vendor": "Parallax",
+  "hardware": {
+    "ram": 524288,
+    "flash": 16777216
+  }
 }

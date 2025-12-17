@@ -34,7 +34,7 @@
       },
       "toolchain-p2llvm": {
         "type": "toolchain",
-        "version": "https://github.com/RileyMcCarthy/p2llvm/releases/download/v0.8.0/tool-p2llvm.zip"
+        "version": "https://github.com/RileyMcCarthy/p2llvm/releases/download/v0.8.1/tool-p2llvm.zip"
       },
       "tool-loadp2": {
         "type": "uploader",
